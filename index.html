@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telephone Directory</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <!-- Include the intl-tel-input CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Include your custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div id="updateMessage" class="alert alert-success" style="display: none;">
+            Information updated successfully!
+        </div>
+        <div id="saveMessage" class="alert alert-success" style="display: none;">
+            Information save successfully!
+        </div>
+        <div id="deleteMessage" class="alert alert-danger" style="display: none;">
+            Information delete successfully!
+        </div>
+        <h1>Telephone Directory</h1>
+        
+        <form id="directoryForm">
+            <div>
+                <label for="fname">First Name <span class="required">*</span></label>
+                <input type="text" id="fname" class="form-input" required>
+                <div id="fnameerror" class="error"></div>
+            </div><br>
+
+            <div class="column">
+                <label for="mname">Middle Name <span class="required">*</span></label>
+                <input type="text" id="mname" class="form-input" required>
+                <div id="mnameerror" class="error"></div>
+            </div><br>
+
+            <div class="column">
+                <label for="lname">Last Name <span class="required">*</span></label>
+                <input type="text" id="lname" class="form-input" required>
+                <div id="lnameerror" class="error"></div><br>
+            </div>
+
+            <div class="column">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" class="form-input" maxlength="10" required>
+                <div id="phoneerror" class="error"></div><br>
+            </div>
+            
+            <label for="address">Address <span class="required">*</span></label>
+            <textarea id="address" class="form-input" required></textarea>
+            <div id="addresserror" class="error"></div><br>
+
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" class="form-input" required>
+            <div id="emailerror" class="error"></div><br>
+
+            <label for="country">Country <span class="required">*</span></label>
+            <select id="country" class="form-input" required>
+                <option value="">Select Country</option>
+            </select>
+            <div id="countryerror" class="error"></div><br>
+
+            <label for="state">State <span class="required">*</span></label>
+            <select id="state" class="form-input" required>
+                <option value="">Select State</option>
+            </select>
+            <div id="stateerror" class="error"></div><br>
+
+            <label for="city">City <span class="required">*</span></label>
+            <select id="city" class="form-input" required>
+                <option value="">Select City</option>
+            </select>
+            <div id="cityerror" class="error"></div><br>
+
+            <label>Gender<span class="required">*</span></label>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <div id="gendererror" class="error"></div><br>
+                
+            <label>
+                <input type="checkbox" id="agreeTerms"> I agree to the Terms and Conditions
+            </label>
+            <div id="termserror" class="error"></div>
+
+            <button type="button" id="saveBtn" class="form-btn" disabled>Save</button>
+            <button type="button" id="clearBtn" class="form-btn">Clear</button>
+        </form>
+    </div>
+    
+
+    <div class="table-container">
+        <h1>Information</h1>
+        <input type="text" id="searchInput" placeholder="Search in table..." class="search-bar">
+        <table id="directoryTable">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Gender</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-controls">
+            <button class="pagination-btn" id="prevPageBtn" >Prev</button>
+            <button class="pagination-btn" id="nextPageBtn" >Next</button>
+        </div>
+    </div>
+
+    <!-- Include the jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Include the intl-tel-input JS -->
+   
+    
+    <!-- Include the utils.js script to support country dial codes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+
+    <!-- Your Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

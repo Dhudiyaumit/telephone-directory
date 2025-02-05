@@ -10,77 +10,66 @@
 </head>
 <body>
     <div class="form-container">
-        <div id="updateMessage" class="alert alert-success" style="display: none;">
-            Information updated successfully!
-        </div>
-        <div id="saveMessage" class="alert alert-success" style="display: none;">
-            Information save successfully!
-        </div>
-        <div id="deleteMessage" class="alert alert-danger" style="display: none;">
-            Information delete successfully!
-        </div>
+        <div id="messageBox" class="alert" style="display: none;"></div>
+
         <h1>Telephone Directory</h1>
         
-        <form id="directoryForm">
+        <form id="directoryForm">   
             <div>
                 <label for="fname">First Name <span class="required">*</span></label>
-                <input type="text" id="fname" class="form-input" required>
-                <div id="fnameerror" class="error"></div>
+                <input type="text" id="fname" class="form-input">
             </div><br>
 
             <div class="column">
                 <label for="mname">Middle Name <span class="required">*</span></label>
                 <input type="text" id="mname" class="form-input" required>
-                <div id="mnameerror" class="error"></div>
             </div><br>
 
             <div class="column">
                 <label for="lname">Last Name <span class="required">*</span></label>
-                <input type="text" id="lname" class="form-input" required>
-                <div id="lnameerror" class="error"></div><br>
+                <input type="text" id="lname" class="form-input">
             </div>
             
             <label for="address">Address <span class="required">*</span></label>
-            <textarea id="address" class="form-input" required></textarea>
-            <div id="addresserror" class="error"></div><br>
+            <textarea id="address" class="form-input" required></textarea><br>
 
             <label for="email">Email <span class="required">*</span></label>
             <input type="email" id="email" class="form-input" required>
-            <div id="emailerror" class="error"></div><br>
+            <br>
 
             <label for="country">Country <span class="required">*</span></label>
             <select id="country" class="form-input" required>
                 <option value="">Select Country</option>
             </select>
-            <div id="countryerror" class="error"></div><br>
+            <br>
 
             <label for="state">State <span class="required">*</span></label>
             <select id="state" class="form-input" required>
                 <option value="">Select State</option>
             </select>
-            <div id="stateerror" class="error"></div><br>
+            <br>
 
             <label for="city">City <span class="required">*</span></label>
             <select id="city" class="form-input" required>
                 <option value="">Select City</option>
             </select>
-            <div id="cityerror" class="error"></div><br>
+            <br>
 
             <div class="column">
                 <label for="phone">Phone Number <span class="required">*</span></label>
                 <input type="tel" id="phone" class="form-input" maxlength="10" required>
-                <div id="phoneerror" class="error"></div><br>
             </div>
+            <br>
             
             <label>Gender<span class="required">*</span></label>
             <input type="radio" name="gender" value="Male"> Male
             <input type="radio" name="gender" value="Female"> Female
-            <div id="gendererror" class="error"></div><br>
+            <br>
                 
             <label>
                 <input type="checkbox" id="agreeTerms"> I agree to the Terms and Conditions
             </label>
-            <div id="termserror" class="error"></div>
+            <br>
 
             <button type="button" id="saveBtn" class="form-btn" disabled>Save</button>
             <button type="button" id="clearBtn" class="form-btn">Clear</button>

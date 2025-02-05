@@ -55,20 +55,10 @@ $(document).ready(function () {
             if (editIndex !== null) {
                 directoryData[editIndex] = entry;
                 localStorage.removeItem('editIndex');
-                $('#updateMessage').show(); // Show the message
-
-                // Hide the message after 3 seconds (3000 milliseconds)
-                setTimeout(function() {
-                    $('#updateMessage').fadeOut();
-                }, 3000); 
+                showMessage("Information Update successfully!", "info");
             } else {
                 directoryData.push(entry);
-                $('#saveMessage').show(); // Show the message
-
-                // Hide the message after 3 seconds (3000 milliseconds)
-                setTimeout(function() {
-                    $('#saveMessage').fadeOut();
-                }, 3000); 
+                showMessage("Information saved successfully!", "success");
             }
 
             localStorage.setItem('directoryData', JSON.stringify(directoryData));
@@ -128,21 +118,34 @@ $(document).ready(function () {
                 localStorage.setItem('editIndex', index);
                 displayTable();
     });
+
+    // $('#tableBody').on('click', '.delete-btn', function () {
+    //     const index = $(this).data('index');
+    //     if (confirm("Are you sure you want to delete this entry?")) {
+    //         let directoryData = JSON.parse(localStorage.getItem('directoryData'));
+    //         directoryData.splice(index, 1);
+    //         $('#deleteMessage').show(); // Show the message
+
+    // // Hide the message after 3 seconds (3000 milliseconds)
+    //     setTimeout(function() {
+    //     $('#deleteMessage').fadeOut();
+    //     }, 3000); 
+    //         localStorage.setItem('directoryData', JSON.stringify(directoryData));
+            
+    //     }
+    // });
+
     $('#tableBody').on('click', '.delete-btn', function () {
         const index = $(this).data('index');
         if (confirm("Are you sure you want to delete this entry?")) {
-            let directoryData = JSON.parse(localStorage.getItem('directoryData'));
+            let directoryData = JSON.parse(localStorage.getItem('directoryData')) || [];
             directoryData.splice(index, 1);
-            $('#deleteMessage').show(); // Show the message
-
-    // Hide the message after 3 seconds (3000 milliseconds)
-        setTimeout(function() {
-        $('#deleteMessage').fadeOut();
-        }, 3000); 
             localStorage.setItem('directoryData', JSON.stringify(directoryData));
-            displayTable();
+            showMessage("Information deleted successfully!", "danger");
+            
         }
     });
+
     $('#searchInput').on('input', function () {
         const searchValue = $(this).val().toLowerCase();
         const directoryData = JSON.parse(localStorage.getItem('directoryData')) || [];
@@ -282,67 +285,66 @@ function updateStateCity(country, state = '') {
         $('.error').text('');
 
         if ($('#fname').val().trim() === '') {
-            $('#fnameerror').text('⚠ First Name is required');
+            $('#fname').after('<span class="error">⚠ First Name is required!</span>');
             isValid = false;
         }
+        
         else {
             $("#fnameerror").text("");
         }
 
         if ($('#mname').val().trim() === '') {
-            $('#mnameerror').text('⚠ Middle Name is required');
+            $('#mname').after('<span class = "error">⚠ Middle Name is required!</span>');
             isValid = false;
         }
 
         if ($('#lname').val().trim() === '') {
-            $('#lnameerror').text('⚠ Last Name is required');
+            $('#lname').after('<span class = "error">⚠ Last Name is required!</span>');
             isValid = false;
         }
 
         if ($('#address').val().trim() === '') {
-            $('#addresserror').text('⚠ Address is required');
+            $('#address').after('<span class = "error">⚠ Address is required!</span>');
             isValid = false;
         }
 
         const phone = $('#phone').val().trim();
         if (!phone || !/^\d{10}$/.test(phone)) {
-            $('#phoneerror').text('⚠ Please enter a valid 10-digit phone number.');
+            $('#phone').after('<span class = "error">⚠ Please enter a valid 10-digit phone number!</span>');
             isValid = false;
-        } else {
-            $('#phoneerror').text("");
         }
 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if ($('#email').val().trim() === '') {
-            $('#emailerror').text('⚠ Email is required');
+            $('#email').after('<span class = "error">⚠ Email is required!</span>');
             isValid = false;
         } else if (!emailRegex.test($('#email').val().trim())) {
-            $('#emailerror').text('⚠ Invalid email format');
+            $('#email').after('<span class ="error">⚠ Invalid email format!</span>');
             isValid = false;
         }
 
         if ($('#country').val() === '') {
-            $('#countryerror').text('⚠ Country is required');
+            $('#country').after('<span class="error">⚠ Country is required!</span>');
             isValid = false;
         }
 
         if ($('#state').val() === '') {
-            $('#stateerror').text('⚠ State is required');
+            $('#state').after('<span class="error">⚠ State is required!</span>');
             isValid = false;
         }
 
         if ($('#city').val() === '') {
-            $('#cityerror').text('⚠ City is required');
+            $('#city').after('<span class = "error">⚠ City is required</span>');
             isValid = false;
         }
 
         if (!$('input[name="gender"]:checked').val()) {
-            $('#gendererror').text('⚠ Gender is required');
+            $('#gender').after('<span class = "error">⚠ Gender is required!</span>');
             isValid = false;
         }
 
         if (!$('#agreeTerms').prop('checked')) {
-            $('#termserror').text('⚠ You must agree to the Terms and Conditions');
+            $('#agreeTerms').after('<span class = "error">⚠ You must agree to the Terms and Conditions</span>');
             isValid = false;
         }
 
@@ -354,4 +356,18 @@ function updateStateCity(country, state = '') {
         $('#agreeTerms').prop('checked', false);
         $('.error').text('');
         localStorage.removeItem('editIndex');
+    }
+
+    function showMessage(message, type = "success") {
+        let messageDiv = $("#messageBox");
+    
+        // Set message text
+        messageDiv.text(message);
+    
+        // Remove previous classes and add the correct class based on the type
+        messageDiv.removeClass("alert-success alert-danger alert-info")
+                  .addClass(`alert-${type}`);
+    
+        // Show the message
+        messageDiv.show().delay(3000).fadeOut();
     }
